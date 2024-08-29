@@ -1,12 +1,20 @@
-.form-input {
+.form-field {
+    .form-input {
 
-    display: flex;
-    justify-content: space-between;
-    //background-color: red;
-
-    label {
-        font-size: 0.75rem;
+        display: flex;
+        justify-content: space-between;
+        //background-color: red;
+    
+        label {
+            font-size: 0.75rem;
+        }
+        input {
+            width: 70%;
+        }
+        
     }
 
-    
+    .error-message {
+        color: red
+    }
 }

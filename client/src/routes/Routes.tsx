@@ -3,6 +3,7 @@ import App from "../App";
 import { homeRoute, addProductRoute } from "./RouteNames";
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import AddProductPage from "../pages/AddProduct/AddProduct";
+import { AddProductProvider } from "../pages/AddProduct/AddProductProvider";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [{ path: homeRoute, element: <ProductsPage /> }],
   },
-  { path: addProductRoute, element: <AddProductPage /> },
+  { path: addProductRoute, element: <AddProductProvider /> },
 ]);
 
 export default router;
