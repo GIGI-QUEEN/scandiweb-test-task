@@ -1,0 +1,18 @@
+.input-box {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+   // background-color: blue;
+}
+
+
+.add-product-form {
+    p {
+        margin-top: 10px;
+        color: gray;
+        text-align: start;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+}
