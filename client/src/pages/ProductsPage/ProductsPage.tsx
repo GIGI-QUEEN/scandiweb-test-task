@@ -29,7 +29,7 @@ const ProductsPage = () => {
           <ProductCard
             product={product}
             key={index}
-            isSelected={selectedItems.includes(product.sku)}
+            isSelected={selectedItems.includes(product.id)}
             handleItemToggle={handleItemToggle}
           />
         ))}

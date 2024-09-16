@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import { ProductAddValidationSchema } from "../validation/productAddValidationSchema";
+import { axiosInstance } from "../api/axios";
+import { Book, DVD, Furniture } from "../types/product";
+import { useNavigate } from "react-router-dom";
+import { homeRoute } from "../routes/RouteNames";
 
 type FormFields =
   | "sku"
@@ -15,6 +19,7 @@ type FormFields =
 
 export const useAddProduct = () => {
   const [option, setOption] = useState<string>("DVD");
+  const navigate = useNavigate();
 
   const { resetField } = useFormContext<ProductAddValidationSchema>();
 
@@ -45,8 +50,9 @@ export const useAddProduct = () => {
     length,
     size,
     width,
+    type,
   }) => {
-    console.log("SKU:", sku);
+    /*     console.log("SKU:", sku);
     console.log("Name:", name);
     console.log("Price:", price);
     console.log("height:", height);
@@ -54,6 +60,33 @@ export const useAddProduct = () => {
     console.log("length:", length);
     console.log("size:", size);
     console.log("width:", width);
+    console.log("type:", type); */
+
+    let product;
+    switch (type) {
+      case "DVD":
+        product = { name, sku, price, type: type.toLowerCase(), size };
+        break;
+      case "Book":
+        product = { name, sku, price, type: type.toLowerCase(), weight };
+        break;
+      case "Furniture":
+        product = {
+          name,
+          sku,
+          price,
+          type: type.toLowerCase(),
+          height,
+          width,
+          length,
+        };
+        break;
+    }
+    await axiosInstance.post("/product/create", product).then((res) => {
+      if (res.status === 200) {
+        navigate(homeRoute);
+      }
+    });
   };
 
   return { option, setOption, handleOptionChange, onSubmit };

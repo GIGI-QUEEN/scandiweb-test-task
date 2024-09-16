@@ -5,7 +5,7 @@ import "./ProductCard.scss";
 interface IProductCardProps {
   product: Product;
   isSelected: boolean;
-  handleItemToggle: (productSku: string) => void;
+  handleItemToggle: (id: number) => void;
 }
 
 const ProductCard = ({
@@ -19,7 +19,7 @@ const ProductCard = ({
         type="checkbox"
         className="delete-checkbox"
         checked={isSelected}
-        onChange={() => handleItemToggle(product.sku)}
+        onChange={() => handleItemToggle(product.id)}
       />
       <p>{product.sku}</p>
       <p>{product.name}</p>
@@ -28,8 +28,7 @@ const ProductCard = ({
       {isBook(product) && <p>Weight: {product.weight}kg</p>}
       {isFurniture(product) && (
         <p>
-          Dimension:{" "}
-          {`${product.dimensions.height}x${product.dimensions.widht}x${product.dimensions.length}`}
+          Dimension: {`${product.height}x${product.width}x${product.length}`}
         </p>
       )}
     </div>
@@ -45,7 +44,7 @@ const isBook = (product: Product): product is Book => {
 };
 
 const isFurniture = (product: Product): product is Furniture => {
-  return "dimensions" in product;
+  return "height" in product;
 };
 
 export default ProductCard;

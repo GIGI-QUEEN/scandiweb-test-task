@@ -1,30 +1,50 @@
 import { useNavigate } from "react-router-dom";
-import { fakeData } from "../api/fakeData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../types/product";
+import { axiosInstance } from "../api/axios";
 
 export const useProducts = () => {
-  const [products, setProducts] = useState(fakeData);
+  const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
 
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
-  const handleItemToggle = (productSku: string) => {
-    if (selectedItems.includes(productSku)) {
-      setSelectedItems(selectedItems.filter((sku) => sku !== productSku));
+  const handleItemToggle = (id: number) => {
+    if (selectedItems.includes(id)) {
+      setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
     } else {
-      setSelectedItems([...selectedItems, productSku]);
+      setSelectedItems([...selectedItems, id]);
     }
   };
 
-  const handleMassDelete = () => {
-    // console.log(itemsToDelete);
-    const newArr = products.filter(
-      (product) => !selectedItems.includes(product.sku)
-    );
-    setProducts(newArr);
-    setSelectedItems([]);
-    //console.log(products);
+  const handleMassDelete = async () => {
+    try {
+      const res = await axiosInstance.delete("/products/delete", {
+        data: {
+          toDelete: selectedItems,
+        },
+      });
+
+      if (res.status === 200) {
+        fetchProducts();
+        setSelectedItems([]);
+      }
+    } catch (error) {
+      console.error("Ошибка при удалении товаров:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    await axiosInstance.get<Product[]>("/products").then((res) => {
+      if (res.status === 200) {
+        //console.log(res.data);
+        setProducts(res.data);
+      }
+    });
   };
 
   return {
