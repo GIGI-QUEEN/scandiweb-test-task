@@ -16,7 +16,7 @@ class DVD extends Product
         $name = '',
         $price = 0.0,
         $sku = '',
-        $size = 0
+        $size = 0,
     ) {
         parent::__construct($db, $id, $name, $price, $sku);
         $this->setSize($size);
@@ -54,5 +54,17 @@ class DVD extends Product
             $this->db->rollBack();
             throw new Exception($e->getMessage());
         }
+    }
+
+    public function show()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'price' => $this->getPrice(),
+            'sku' => $this->getSku(),
+            'type' => $this->getTypeName(),
+            'size' => $this->getSize(),
+        ];
     }
 }

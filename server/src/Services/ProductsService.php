@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Core\DatabaseInterface;
+use App\Core\Helpers;
 use App\Factories\ProductFactory;
 use Exception;
 
@@ -19,24 +20,39 @@ class ProductsService
     public function getProducts()
     {
         try {
-            $products = $this->db->select("
+            $productsData = $this->db->select("
             SELECT
                 p.id AS product_id,
                 p.sku,
                 p.name,
                 p.price,
-                pt.type_name AS product_type,
-                b.weight AS book_weight,
-                d.size AS dvd_size,
-                f.height AS furniture_height,
-                f.width AS furniture_width,
-                f.length AS furniture_length
+                pt.type_name AS type,
+                b.weight AS weight,
+                d.size AS size,
+                f.height AS height,
+                f.width AS width,
+                f.length AS length
             FROM products p
                 JOIN product_types pt ON p.type_id = pt.id
                 LEFT JOIN books b ON p.id = b.product_id
                 LEFT JOIN dvds d ON p.id = d.product_id
                 LEFT JOIN furnitures f ON p.id = f.product_id
     ");
+            // Helpers::dd($products[0]);
+            $products = [];
+            foreach ($productsData as $product) {
+                //Helpers::dd($product);
+
+                // print_r($product['product_type'] . '\\');
+                $prod = ProductFactory::createProduct($this->db, $product);
+                //Helpers::dd($prod);
+                //$prod->getTypeV2();
+                $products[] = $prod->show();
+                //print_r($product);
+                //Helpers::dd($val);
+            }
+            //die();
+            // Helpers::dd($products[7]);
             return $products;
         } catch (Exception $e) {
             throw new Exception('Failed to load products: ' . $e->getMessage());
@@ -47,6 +63,7 @@ class ProductsService
     {
         try {
             $product = ProductFactory::createProduct($this->db, $data);
+            //Helpers::dd($product);
             $product->store();
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

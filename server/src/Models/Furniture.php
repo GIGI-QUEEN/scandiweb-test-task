@@ -81,4 +81,18 @@ class Furniture extends Product
             throw new Exception($e->getMessage());
         }
     }
+
+    public function show()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'price' => $this->getPrice(),
+            'sku' => $this->getSku(),
+            'type' => $this->getTypeName(),
+            'height' => $this->getHeight(),
+            'length' => $this->getlength(),
+            'width' => $this->getWidth(),
+        ];
+    }
 }

@@ -21,6 +21,11 @@ abstract class Product
         $this->setSku($sku);
     }
 
+    public function getTypeName()
+    {
+        return strtolower((new \ReflectionClass($this))->getShortName());
+    }
+
     public function getId()
     {
         return $this->id;
@@ -62,4 +67,6 @@ abstract class Product
     }
 
     abstract public function store();
+
+    abstract public function show();
 }

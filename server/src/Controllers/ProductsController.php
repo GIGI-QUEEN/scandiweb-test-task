@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\App;
 use App\Core\Database;
+use App\Core\Helpers;
 use App\Core\Request;
 use App\Core\Response;
 use App\Services\ProductsService;
@@ -23,10 +24,10 @@ class ProductsController
         try {
             $productService = new ProductsService($this->db);
             $products = $productService->getProducts();
-            $response = [
+            /* $response = [
                 "products" => $products
-            ];
-            Response::send($response);
+            ]; */
+            Response::send($products);
         } catch (Exception $e) {
             $response = [
                 'message' => $e->getMessage(),
@@ -39,6 +40,7 @@ class ProductsController
     {
         try {
             $toDelete = $request->getBody()['toDelete'];
+            //Helpers::dd($toDelete);
             $productService = new ProductsService($this->db);
             $productService->deleteProducts($toDelete);
             $response = ['message' => 'Products successfuly deleted'];
