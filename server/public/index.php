@@ -33,7 +33,9 @@ $container->bind('App\Core\Database', function () {
         'host' => 'localhost',
         'port' => 3306,
         'dbname' => 'scandiweb',
-        'charset' => 'utf8mb4'
+        'charset' => 'utf8mb4',
+        'username' => 'user',
+        'password' => 'user_password'
     ];
 
     return new Database($config);
@@ -46,38 +48,3 @@ $router = require Helpers::base_path('api.php');
 $request = new Request();
 
 $router->resolve($request);
-
-/* $router = new Router();
-$routes = require Helpers::base_path('routes.php');
-
-
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-$method = $_SERVER['REQUEST_METHOD'];
-
-try {
-    $router->route($uri, $method);
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
-} */
-//dd($_SERVER);
-//dd(parse_url($_SERVER['REQUEST_URI']));
-
-/* $path = parse_url($_SERVER['REQUEST_URI'])['path'];
-
-if ($_SERVER['REQUEST_URI'] === '/healthcheck' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    $controller = new HealthCheckController();
-    $controller->handle();
-} 
-
-if ($path === '/products' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    $controller = new ProductsController();
-    $controller->handle();
-} */
-
-
-
-/* $config = require('../config.php');
-
-$db = new Database($config);
-
-var_dump() */
