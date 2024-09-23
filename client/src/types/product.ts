@@ -17,9 +17,3 @@ export interface Furniture extends Product {
   length: number;
   // dimensions: Dimensions;
 }
-
-type Dimensions = {
-  height: number;
-  widht: number;
-  length: number;
-};

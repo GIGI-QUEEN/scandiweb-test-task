@@ -44,7 +44,7 @@ export const FormSelectInput = <T extends FieldValues>({
   handleOptionChange,
   name,
 }: IFormSelectInputProps<T>) => {
-  const { register, resetField } = useFormContext<T>();
+  const { register } = useFormContext<T>();
 
   const { onChange, ...rest } = register(name);
   return (

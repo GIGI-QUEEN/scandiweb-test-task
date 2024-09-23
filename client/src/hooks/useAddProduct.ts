@@ -2,7 +2,6 @@ import { useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import { ProductAddValidationSchema } from "../validation/productAddValidationSchema";
 import { axiosInstance } from "../api/axios";
-import { Book, DVD, Furniture } from "../types/product";
 import { useNavigate } from "react-router-dom";
 import { homeRoute } from "../routes/RouteNames";
 

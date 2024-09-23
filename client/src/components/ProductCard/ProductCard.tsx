@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Book, DVD, Furniture, Product } from "../../types/product";
 import "./ProductCard.scss";
 
