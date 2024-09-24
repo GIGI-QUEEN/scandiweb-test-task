@@ -26,7 +26,7 @@ const AddProductPage = () => {
       <div>
         <form
           action=""
-          id="prodcut_form"
+          id="product_form"
           className="main-container add-product-form"
         >
           <div className="input-box">
