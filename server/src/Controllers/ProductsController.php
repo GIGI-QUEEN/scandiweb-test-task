@@ -18,7 +18,7 @@ class ProductsController
     public function __construct()
     {
         $this->db = App::resolve(Database::class);
-        $this->logger = new Logger(__DIR__ . '/../../request_logs.txt');
+        $this->logger = new Logger(__DIR__ . '/../../request_logs.txt', Logger::LEVEL_INFO, false, true);
     }
 
     public function index()
