@@ -1,5 +1,18 @@
 version: '3.8'
 services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-backend
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:80" # Maps localhost:8080 to the container's port 80
+    depends_on:
+      - db
+    networks:
+      - backend
 
   db:
     image: mysql:8.0
@@ -12,4 +25,13 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./db/scripts:/docker-entrypoint-initdb.d  
+      - ./db/scripts:/docker-entrypoint-initdb.d 
+    networks:
+      - backend
+      
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mysql_data:

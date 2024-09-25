@@ -25,7 +25,7 @@ const ProductsPage = () => {
         </button>
       </Header>
       <div className="main-container products-container">
-        {products.map((product, index) => (
+        {products?.map((product, index) => (
           <ProductCard
             product={product}
             key={index}

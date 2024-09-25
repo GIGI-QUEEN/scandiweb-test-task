@@ -1,3 +1,4 @@
 /vendor/
 db/db_data/*
 !db/db_data/info.txt
+request_logs.txt

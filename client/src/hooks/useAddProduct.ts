@@ -2,7 +2,6 @@ import { useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import { ProductAddValidationSchema } from "../validation/productAddValidationSchema";
 import { axiosInstance } from "../api/axios";
-import { Book, DVD, Furniture } from "../types/product";
 import { useNavigate } from "react-router-dom";
 import { homeRoute } from "../routes/RouteNames";
 
@@ -52,16 +51,6 @@ export const useAddProduct = () => {
     width,
     type,
   }) => {
-    /*     console.log("SKU:", sku);
-    console.log("Name:", name);
-    console.log("Price:", price);
-    console.log("height:", height);
-    console.log("weight:", weight);
-    console.log("length:", length);
-    console.log("size:", size);
-    console.log("width:", width);
-    console.log("type:", type); */
-
     let product;
     switch (type) {
       case "DVD":
@@ -82,11 +71,12 @@ export const useAddProduct = () => {
         };
         break;
     }
-    await axiosInstance.post("/product/create", product).then((res) => {
-      if (res.status === 200) {
-        navigate(homeRoute);
-      }
-    });
+    try {
+      await axiosInstance.post("/product/create", product);
+      navigate(homeRoute);
+    } catch (error) {
+      navigate(homeRoute);
+    }
   };
 
   return { option, setOption, handleOptionChange, onSubmit };
