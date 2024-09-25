@@ -28,6 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $container = new Container();
 
 $container->bind('App\Core\Database', function () {
+    /*  $config = [
+        'host' => 'localhost',
+        'port' => 3306,
+        'dbname' => 'scandiweb',
+        'charset' => 'utf8mb4',
+    ]; */
     $config = [
         'host' => 'db',
         'port' => 3306,
