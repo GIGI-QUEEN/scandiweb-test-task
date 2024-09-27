@@ -19,7 +19,7 @@ const ProductsPage = () => {
         <button
           id="delete-product-btn"
           onClick={() => handleMassDelete()}
-          //disabled={selectedItems.length === 0}
+          className="mass-delete-button"
         >
           mass delete
         </button>

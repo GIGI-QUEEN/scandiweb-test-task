@@ -4,3 +4,10 @@
     grid-gap: 35px;
     justify-items: center;
   }
+
+  .mass-delete-button {
+    &:hover {
+      background-color: rgb(207, 37, 37);
+      border: 1px solid rgb(207, 37, 37);
+    };
+  }

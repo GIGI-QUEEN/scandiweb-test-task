@@ -41,7 +41,6 @@ export const useProducts = () => {
   const fetchProducts = async () => {
     await axiosInstance.get<Product[]>("/products").then((res) => {
       if (res.status === 200) {
-        //console.log(res.data);
         setProducts(res.data);
       }
     });

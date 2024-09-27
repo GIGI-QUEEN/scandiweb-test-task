@@ -1,16 +1,5 @@
 import { z } from "zod";
 
-/* export const productAddValidationSchema = z.object({
-  sku: z.string().min(1, { message: "Please, provide SKU" }),
-  name: z.string().min(1, { message: "Please, provide product's name" }),
-  price: z.coerce.number().min(0.001, { message: "Please, provide price" }),
-  size: z.coerce.number().min(1, { message: "Please, provide size" }),
-  weight: z.coerce.number().min(0.001, { message: "Please, provide weight" }),
-  height: z.coerce.number().min(1, { message: "Please, provide height" }),
-  width: z.coerce.number().min(1, { message: "Please, provide width" }),
-  length: z.coerce.number().min(1, { message: "Please, provide length" }),
-}); */
-
 export const productAddValidationSchema = z
   .object({
     sku: z.string().min(1, { message: "Please, provide SKU" }),
