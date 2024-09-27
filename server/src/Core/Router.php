@@ -41,7 +41,6 @@ class Router
         list($controllerName, $method) = explode('@', $controllerAction);
 
         $controller = new $controllerName();
-        //Helpers::dd($controller);
 
         if (!method_exists($controller, $method)) {
             http_response_code(404);

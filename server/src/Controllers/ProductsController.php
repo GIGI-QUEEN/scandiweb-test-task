@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Core\App;
 use App\Core\Database;
-use App\Core\Helpers;
 use App\Core\Logger;
 use App\Core\Request;
 use App\Core\Response;
@@ -28,7 +27,6 @@ class ProductsController
             $productService = new ProductsService($this->db);
             $products = $productService->getProducts();
 
-            //$this->logger->info('Get request: ' . print_r($products, true));
 
             Response::send($products);
         } catch (Exception $e) {
@@ -43,8 +41,6 @@ class ProductsController
     {
         try {
             $toDelete = $request->getBody()['toDelete'];
-            //Helpers::dd($toDelete);
-            $this->logger->info('Delete request: ' . print_r($toDelete, true));
 
             $productService = new ProductsService($this->db);
             $productService->deleteProducts($toDelete);
@@ -62,13 +58,11 @@ class ProductsController
     {
         try {
             $data = $request->getBody();
-            $this->logger->info('Create request: ' . print_r($data, true));
             $productService = new ProductsService($this->db);
             $productService->storeProduct($data);
             $response = ['message' => 'Product successfuly added'];
             echo json_encode($response);
         } catch (Exception $e) {
-            // $this->logger->error('Error occurred: ' . $e->getMessage());
             $response = [
                 'message' => $e->getMessage()
             ];

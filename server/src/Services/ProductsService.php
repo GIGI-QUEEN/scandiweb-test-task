@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Core\DatabaseInterface;
-use App\Core\Helpers;
 use App\Factories\ProductFactory;
 use Exception;
 
@@ -38,21 +37,12 @@ class ProductsService
                 LEFT JOIN dvds d ON p.id = d.product_id
                 LEFT JOIN furnitures f ON p.id = f.product_id
     ");
-            // Helpers::dd($products[0]);
             $products = [];
             foreach ($productsData as $product) {
-                //Helpers::dd($product);
 
-                // print_r($product['product_type'] . '\\');
                 $prod = ProductFactory::createProduct($this->db, $product);
-                //Helpers::dd($prod);
-                //$prod->getTypeV2();
                 $products[] = $prod->show();
-                //print_r($product);
-                //Helpers::dd($val);
             }
-            //die();
-            // Helpers::dd($products[7]);
             return $products;
         } catch (Exception $e) {
             throw new Exception('Failed to load products: ' . $e->getMessage());
@@ -63,7 +53,6 @@ class ProductsService
     {
         try {
             $product = ProductFactory::createProduct($this->db, $data);
-            //Helpers::dd($product);
             $product->store();
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

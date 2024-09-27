@@ -5,7 +5,6 @@ namespace App\Factories;
 use App\Models\Book;
 use App\Models\DVD;
 use App\Core\DatabaseInterface;
-use App\Core\Helpers;
 use App\Models\Furniture;
 
 class ProductFactory
@@ -18,7 +17,6 @@ class ProductFactory
         $sku = $data['sku'];
         $type = $data['type'];
         $id = $data['product_id'] ?? null;
-        // Helpers::dd($data);
         switch ($type) {
             case 'dvd':
                 return new DVD($db, $id, $name, $price, $sku, $data['size']);
